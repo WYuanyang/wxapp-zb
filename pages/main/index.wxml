@@ -1,0 +1,21 @@
+<!--pages/main/index.wxml-->
+<view class="container-box">
+    <view class="img-box">
+        <image bindtap="previewImg" mode="scaleToFill" src="{{imagePath}}"></image>
+    </view>
+    <form bindsubmit="formSubmit">
+        <view class="input-row">
+            <label>姓名</label>
+            <input name='name' type="text" maxlength="20" placeholder="王 思聪"/>
+        </view>
+        <view class="input-row">
+            <label>金额</label>
+            <input name="money" type="number" maxlength="7"  placeholder="1000000"/>
+        </view>
+        <button formType="submit" class="mybtn" type="primary">生成图片</button>
+    </form>
+</view>
+<view hidden="{{maskHidden}}" class="mask"></view>
+<view class="canvas-box">
+    <canvas hidden="{{canvasHidden}}" style="width: 686px;height: 686px;" canvas-id="mycanvas"/>
+</view>
