@@ -1,6 +1,6 @@
 # wxapp-zb
 微信小程序--装逼生成器
-![mahua](http://www.wxapp-union.com/data/attachment/forum/201612/01/181803nbe62e4c8alt2d42.png)
+![mahua](http://jsh5css.cn/blog/wp-content/uploads/2017/11/11.gif)
 * 感谢[微信小程序|联盟](http://www.wxapp-union.com/) [@amis](http://www.wxapp-union.com/home.php?mod=space&uid=310)提供的素材和创意；  
 * 安卓机测试还有问题，还在解决中，
 * 原设计稿姓名为黑色字体白色描边效果，由于微信小程序中canvas还没有 `ctx.strokeText()`方法，所以暂时没做描边效果
