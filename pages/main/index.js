@@ -3,25 +3,19 @@ var util = require("../../utils/util.js");
 var toPinyin = require("../../utils/toPinyin.js");
 Page({
   data:{
-    imagePath:"/images/bankcard.jpg",
+    imagePath:"",
     name:"WANG SICONG",
     money:"1000000",
     maskHidden:true,
-    /*
-    官网说hidden只是简单的控制显示与隐藏，组件始终会被渲染，
-    但是将canvas转化成图片走的居然是fail，hidden为false就是成功的
-    所以这里手动控制显示隐藏canvas
-    */
-    canvasHidden:false//初始时显示canvas
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    
+    this.createNewImg();
+    //创建初始化图片
   },
   onReady:function(){
     // 页面渲染完成
-    this.createNewImg();
-    //创建初始化图片
+    
     
   },
   onShow:function(){
@@ -60,33 +54,34 @@ Page({
   //将canvas转换为图片保存到本地，然后将图片路径传给image图片的src
   createNewImg:function(){
     var that = this;
-    var context = wx.createContext();
-    var path = "images/bankcard.jpg";
+    var context = wx.createCanvasContext('mycanvas');
+    var path = "/images/bankcard.jpg";
     //将模板图片绘制到canvas,在开发工具中drawImage()函数有问题，不显示图片
     //不知道是什么原因，手机环境能正常显示
     context.drawImage(path, 0, 0,686,686);
+    //context.draw(true);
+    //context.draw();
     this.setMoney(context);
     this.setName(context);
     //绘制图片
-    wx.drawCanvas({
-          canvasId: "mycanvas",
-          actions: context.getActions()
-    });
-    //将生成好的图片保存到本地
-    wx.canvasToTempFilePath({
-      canvasId: 'mycanvas',
-      success: function success(res) {
-        wx.saveFile({
-          tempFilePath: res.tempFilePath,
-          success: function success(res) {
-            that.setData({
-              imagePath:res.savedFilePath,
-              canvasHidden:true//生成完图片后将画布隐藏
-            });
-          }
-        });
-      }
-    });
+    context.draw();
+    //将生成好的图片保存到本地，需要延迟一会，绘制期间耗时
+    setTimeout(function(){
+      wx.canvasToTempFilePath({
+        canvasId: 'mycanvas',
+        success: function (res) {
+          var tempFilePath = res.tempFilePath;
+          console.log(tempFilePath);
+          that.setData({
+            imagePath: tempFilePath,
+            // canvasHidden:true
+          });
+        },
+        fail: function (res) {
+          console.log(res);
+        }
+      });
+    },200);
   },
   //点击图片进行预览，长按保存分享图片
   previewImg:function(e){
@@ -105,13 +100,12 @@ Page({
     this.setData({
       name:name,
       money:money,
-      maskHidden:false,
-      canvasHidden:false
+      maskHidden:false
     });
     wx.showToast({
       title: '装逼中...',
       icon: 'loading',
-      duration:2000
+      duration:1000
     });
     setTimeout(function(){
       wx.hideToast()
@@ -119,7 +113,7 @@ Page({
       that.setData({
         maskHidden:true
       });
-    },2000)
+    },1000)
     
   }
 

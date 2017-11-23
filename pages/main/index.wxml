@@ -17,5 +17,5 @@
 </view>
 <view hidden="{{maskHidden}}" class="mask"></view>
 <view class="canvas-box">
-    <canvas hidden="{{canvasHidden}}" style="width: 686px;height: 686px;" canvas-id="mycanvas"/>
+    <canvas  style="width: 686px;height: 686px;" canvas-id="mycanvas"/>
 </view>
