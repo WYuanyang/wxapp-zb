@@ -1,4 +1,3 @@
-# wxapp-zb
 # 微信小程序--装逼生成器
 ![mahua](http://jsh5css.cn/blog/wp-content/uploads/2017/11/11.gif)
 * 感谢[微信小程序|联盟](http://www.wxapp-union.com/) [@amis](http://www.wxapp-union.com/home.php?mod=space&uid=310)提供的素材和创意；  
